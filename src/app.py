@@ -32,7 +32,21 @@ def latex_to_image():
     subprocess.run(["pdflatex", "formula.tex"])
 
     # PDFをPNG画像に変換
-    subprocess.run(["convert", "-density", "300", "formula.pdf", "formula.png"])
+    # subprocess.run(["convert", "-density", "300", "formula.pdf", "formula.png"])
+    # PDFを背景透明のPNG画像に変換
+    subprocess.run(
+        [
+            "convert",
+            "-density",
+            "300",
+            "formula.pdf",
+            "-trim",
+            "+repage",
+            "-background",
+            "transparent",
+            "formula.png",
+        ]
+    )
 
     # 画像を返す
     return send_file("formula.png", mimetype="image/png")
