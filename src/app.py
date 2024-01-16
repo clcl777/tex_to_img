@@ -24,11 +24,12 @@ def latex_to_image():
     \\end{{document}}
     """
 
-    with open("formula.tex", "w") as file:
+    with open("tmp/formula.tex", "w") as file:
         file.write(latex_source)
 
     # LaTeXファイルをPDFに変換
-    subprocess.run(["pdflatex", "formula.tex"])
+    # subprocess.run(["pdflatex", "tmp/formula.tex"])
+    subprocess.run(["pdflatex", "-output-directory", "tmp", "tmp/formula.tex"])
 
     # PDFをPNG画像に変換
     subprocess.run(
@@ -36,15 +37,15 @@ def latex_to_image():
             "convert",
             "-density",
             "300",
-            "formula.pdf",
+            "tmp/formula.pdf",
             "-trim",
             "+repage",
             "-background",
             "transparent",
-            "formula.png",
+            "tmp/formula.png",
         ]
     )
-    return send_file("formula.png", mimetype="image/png")
+    return send_file("tmp/formula.png", mimetype="image/png")
 
 
 if __name__ == "__main__":

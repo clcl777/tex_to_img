@@ -9,6 +9,8 @@ RUN apt-get update && apt-get install -y \
     texlive-latex-extra \
     imagemagick
 
+RUN mkdir /app/tmp
+
 WORKDIR /app
 
 COPY requirements.txt /app/
