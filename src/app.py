@@ -14,7 +14,6 @@ def latex_to_image():
     data = request.json
     latex_formula = data.get("formula")
 
-    # LaTeXソースコードを作成
     latex_source = f"""
     \\documentclass[12pt]{{article}}
     \\usepackage{{bm}}
@@ -32,8 +31,6 @@ def latex_to_image():
     subprocess.run(["pdflatex", "formula.tex"])
 
     # PDFをPNG画像に変換
-    # subprocess.run(["convert", "-density", "300", "formula.pdf", "formula.png"])
-    # PDFを背景透明のPNG画像に変換
     subprocess.run(
         [
             "convert",
@@ -47,8 +44,6 @@ def latex_to_image():
             "formula.png",
         ]
     )
-
-    # 画像を返す
     return send_file("formula.png", mimetype="image/png")
 
 
