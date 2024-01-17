@@ -1,5 +1,7 @@
 import subprocess
 from flask import Flask, request, send_file
+from PIL import Image
+from PIL.PngImagePlugin import PngInfo
 
 app = Flask(__name__)
 
@@ -44,7 +46,13 @@ def latex_to_image():
             "tmp/formula.png",
         ]
     )
-    return send_file("tmp/formula.png", mimetype="image/png")
+
+    # メタデータを付与
+    image = Image.open("tmp/formula.png")
+    meta = PngInfo()
+    meta.add_text("formula", latex_formula)
+    image.save("tmp/formula_with_meta.png", "PNG", pnginfo=meta)
+    return send_file("tmp/formula_with_meta.png", mimetype="image/png")
 
 
 if __name__ == "__main__":
