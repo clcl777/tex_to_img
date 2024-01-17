@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  sever:
+    build:
+      dockerfile: ./docker/server/Dockerfile
+    container_name: flask_latex_sample
+    ports:
+      - "5001:5001"
+    tty: true
+    volumes:
+      - ../src:/root/src
