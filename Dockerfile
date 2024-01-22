@@ -16,4 +16,6 @@ RUN mkdir -p /src/tmp
 RUN pip3 install -r requirements.txt
 RUN sed -i '/<policy domain="coder" rights="none" pattern="PDF" \/>/d' /etc/ImageMagick-6/policy.xml
 COPY . /app
+ENV PORT 8080
+EXPOSE 8080
 CMD ["python3", "app.py"]
