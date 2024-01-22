@@ -31,6 +31,7 @@ def latex_to_image():
         file.write(latex_source)
 
     # LaTeXファイルをPDFに変換
+    subprocess.run(["which", "pdflatex"])
     subprocess.run(["pdflatex", "-output-directory", "tmp", "tmp/formula.tex"])
 
     # PDFをPNG画像に変換
