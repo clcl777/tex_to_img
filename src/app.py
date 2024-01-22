@@ -2,6 +2,7 @@ import subprocess
 from flask import Flask, request, send_file
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
+import os
 
 app = Flask(__name__)
 
@@ -56,4 +57,6 @@ def latex_to_image():
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0", port=5001)
+    # app.run(debug=False, host="0.0.0.0", port=5001)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(debug=False, host="0.0.0.0", port=port)
