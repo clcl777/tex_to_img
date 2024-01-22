@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     imagemagick=8:6.9.11.60*
 
 WORKDIR /src
-COPY ../../src /src
+COPY ./src /src
 RUN mkdir -p /src/tmp
 
 RUN pip3 install -r requirements.txt
